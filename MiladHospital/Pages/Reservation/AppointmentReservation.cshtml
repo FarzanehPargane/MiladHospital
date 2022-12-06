@@ -1,0 +1,99 @@
+﻿@page
+@model MiladHospital.Pages.Reservation.AppointmentReservationModel
+@{
+    ViewData["Title"] = "تکمیل اطلاعات و ثبت نهایی رزرو نوبت";
+}
+
+<div class="row ">
+    <form method="post" enctype="multipart/form-data">
+        @*<div class="modal fade" id="FinalReserve" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">تایید نهایی رزرو</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        تایید نهایی با موفقیت انجام شد
+                        نوبت شما شماره @ViewData["Appointment"] می باشد.
+                        کد رهگیری شما @ViewData["TrackingCode"] می باشد.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    اطلاعات بیمار
+                </div>
+
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div asp-validation-summary="All" class="text-danger">
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="appointmentReservation.Name" class="control-label"></label>
+                        <input type="text" asp-for="appointmentReservation.Name" class="form-control">
+                        <span asp-validation-for="appointmentReservation.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="appointmentReservation.Surname" class="control-label"></label>
+                        <input type="text" asp-for="appointmentReservation.Surname" class="form-control">
+                        <span asp-validation-for="appointmentReservation.Surname" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="appointmentReservation.Mellicode" class="control-label"></label>
+                        <input asp-for="appointmentReservation.Mellicode" type="text" class="form-control" aria-describedby="Mellicode">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="appointmentReservation.Mobile" class="control-label"></label>
+                        <input type="text" asp-for="appointmentReservation.Mobile" class="form-control">
+                        <span asp-validation-for="appointmentReservation.Mobile" class="text-danger"></span>
+                    </div>
+
+                    <input type="submit" value="تایید نهایی رزرو نوبت" class="btn btn-success" />
+                    @if (ViewData["Duplicate"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            برای این بیمار قبلا وقت رزرو شده است
+                            نوبت بیمار شماره @ViewData["Appointment"] می باشد.
+                            کد رهگیری بیمار @ViewData["TrackingCode"] می باشد.
+                        </div>
+                    }
+                    else
+                    @if (ViewData["Capacity"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            ظرفیت به پایان رسیده است
+                        </div>
+                    }
+                    else
+                    @if (ViewData["Appointment"] != null)
+                    {
+                        <div class="alert alert-success">
+                            تایید نهایی با موفقیت انجام شد.
+                            نوبت شما شماره @ViewData["Appointment"] می باشد.
+                            کد رهگیری شما @ViewData["TrackingCode"] می باشد.
+                        </div>
+                    }
+                    else
+                    @if (ViewData["faild"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            ثبت با مشکل مواجه شد
+                        </div>
+                    }
+                </div>
+        
+            <!-- /.panel-body -->
+        </div>
+</div>
+
+    </form>
+</div>
